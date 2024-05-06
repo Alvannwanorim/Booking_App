@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export default function Hero() {
@@ -8,14 +9,17 @@ export default function Hero() {
           <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
             <img
               alt=""
-              src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              className="absolute inset-0 h-full w-full object-cover"
+              src="doctors.jpeg"
+              height={800}
+              width={800}
+              className="absolute inset-0 h-full w-full object-cover rounded-3xl"
             />
           </div>
 
           <div className="lg:py-24">
             <h2 className="text-3xl font-bold sm:text-4xl">
-              Grow your audience
+              Find & Book <span className="text-primary">Appointments</span>{" "}
+              with your Fav <span className="text-primary">Doctors</span>
             </h2>
 
             <p className="mt-4 text-gray-600">
@@ -25,12 +29,7 @@ export default function Hero() {
               repellat.
             </p>
 
-            <a
-              href="#"
-              className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
-            >
-              Get Started Today
-            </a>
+            <Button className="mt-10">Explore Now</Button>
           </div>
         </div>
       </div>

@@ -28,11 +28,8 @@ export default function Header() {
 
         <ul className="md:flex items-center gap-8 hidden">
           {Menu.map((item, index) => (
-            <Link href={item.path}>
-              <li
-                key={index}
-                className="hover:text-primary cursor-pointer hover:scale-105 transition-all ease-in-out font-medium"
-              >
+            <Link href={item.path} key={index}>
+              <li className="hover:text-primary cursor-pointer hover:scale-105 transition-all ease-in-out font-medium">
                 {item.name}
               </li>
             </Link>
