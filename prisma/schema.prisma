@@ -24,4 +24,29 @@ model Category {
   id String @id @default(cuid())
   name String
   icon String
+  doctors Doctor[]
 }
+
+model Doctor {
+  id String @id @default(cuid())
+  first_name String
+  last_name String
+  image String
+  address String
+  patients String?
+  years_of_experience String? 
+  start_time String
+  end_time String
+  about String?
+  phone String?
+  category Category[]
+}
+
+// model CategoriesOnDoctors {
+//   doctor       Doctor     @relation(fields: [doctor_id], references: [id])
+//   doctor_id     String
+//   category   Category @relation(fields: [category_id], references: [id])
+//   category_id String 
+
+//   @@id([doctor_id, category_id])
+// }

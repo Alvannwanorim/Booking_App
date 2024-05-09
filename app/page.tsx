@@ -1,4 +1,5 @@
 import CategorySearch from "./_components/CategorySearch";
+import DoctorList from "./_components/DoctorList";
 import Hero from "./_components/Hero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <Hero />
       <CategorySearch />
+      <DoctorList />
     </div>
   );
 }
