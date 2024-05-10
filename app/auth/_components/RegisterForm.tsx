@@ -9,7 +9,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginSchema } from "@/schemas";
+import { LoginSchema, RegisterSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import FormError from "./FormError";
@@ -17,22 +17,24 @@ import FormSuccess from "./FormSuccess";
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/actions/login";
-function LoginForm() {
+function RegisterForm() {
   const [error, setError] = useState<string | undefined>("");
 
   const [success, setSuccess] = useState<string | undefined>("");
 
   const [isPending, startTransaction] = useTransition();
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     startTransaction(() => {
       setError("");
       setSuccess("");
@@ -55,6 +57,42 @@ function LoginForm() {
       <Form {...form}>
         <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
+            <div className=" flex w-full gap-x-3">
+              <FormField
+                control={form.control}
+                name="first_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="first name"
+                        type="text"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="last_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="last name"
+                        type="email"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="email"
@@ -98,7 +136,7 @@ function LoginForm() {
             variant="link"
             disabled={isPending}
           >
-            Login
+            Register
           </Button>
         </form>
       </Form>
@@ -106,4 +144,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default RegisterForm;
