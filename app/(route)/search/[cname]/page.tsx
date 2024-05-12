@@ -1,17 +1,11 @@
 "use client";
 import Doctors from "@/app/_components/Doctors";
 import { getDoctorsByCategory, getDoctorsList } from "@/data/doctor";
-import { Doctor } from "@/interfaces";
+import { Doctor, SearchParams } from "@/interfaces";
 import { getSingleValue } from "@/lib/helpers";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-interface SearchParams {
-  query?: string;
-  category?: string;
-  cname?: string;
-  [key: string]: any;
-}
 const Search: React.FC<SearchParams> = ({ params }) => {
   const cnameParam = getSingleValue(params.cname);
   const category = decodeURIComponent(cnameParam);

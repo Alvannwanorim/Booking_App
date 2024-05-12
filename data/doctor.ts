@@ -36,3 +36,47 @@ export const getDoctorsByCategory = async (category: string) => {
     return [];
   }
 };
+
+export const getDoctorsByCategories = async (
+  categories: string[] | undefined
+) => {
+  try {
+    if (!categories) return [];
+    const doctors = await db.doctor.findMany({
+      where: {
+        category: {
+          some: {
+            name: {
+              in: categories,
+            },
+          },
+        },
+      },
+      include: {
+        category: true,
+      },
+      take: 10,
+    });
+    return doctors;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export const getDoctorsById = async (id: string) => {
+  try {
+    const doctors = await db.doctor.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        category: true,
+      },
+    });
+    return doctors;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};

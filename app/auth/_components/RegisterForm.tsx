@@ -9,14 +9,14 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginSchema, RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import FormError from "./FormError";
 import FormSuccess from "./FormSuccess";
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/actions/login";
+import { register } from "@/actions/register";
 function RegisterForm() {
   const [error, setError] = useState<string | undefined>("");
 
@@ -38,7 +38,7 @@ function RegisterForm() {
     startTransaction(() => {
       setError("");
       setSuccess("");
-      login(values).then((data) => {
+      register(values).then((data) => {
         console.log(data);
         if (data?.error) {
           setError(data.error);
@@ -63,7 +63,7 @@ function RegisterForm() {
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>FirstName</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -80,12 +80,12 @@ function RegisterForm() {
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>LastName</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="last name"
-                        type="email"
+                        type="text"
                         disabled={isPending}
                       />
                     </FormControl>

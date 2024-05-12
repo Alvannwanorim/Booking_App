@@ -1,9 +1,19 @@
+import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+  const image = session?.user?.image ?? "/default.png";
+  console.log(image);
+
   const Menu = [
     {
       id: 1,
@@ -36,7 +46,49 @@ export default function Header() {
           ))}
         </ul>
       </div>
-      <Button>Get Started </Button>
+      {session?.user ? (
+        <>
+          <Popover>
+            <PopoverTrigger>
+              <Image
+                src={`${image}`}
+                alt="user img"
+                height={30}
+                width={30}
+                className="rounded-full border-[1px] "
+              />
+            </PopoverTrigger>
+            <PopoverContent>
+              <ul className="flex flex-col gap-1 justify-center items-center">
+                <li className="cursor-pointer hover:bg-slate-100 rounded-md w-full flex justify-center items-center p-1">
+                  Profile
+                </li>
+                <li className="cursor-pointer hover:bg-slate-100 rounded-md w-full flex justify-center items-center p-1">
+                  My Bookings
+                </li>
+                <li className="cursor-pointer hover:bg-slate-100 rounded-md w-full flex justify-center items-center p-1">
+                  <form
+                    action={async () => {
+                      "use server";
+                      await signOut({
+                        redirectTo: "/",
+                      });
+                    }}
+                  >
+                    <Button variant="link" type="submit" className="w-full">
+                      Logout
+                    </Button>
+                  </form>
+                </li>
+              </ul>
+            </PopoverContent>
+          </Popover>
+        </>
+      ) : (
+        <>
+          <Button>Get Started </Button>
+        </>
+      )}
     </div>
   );
 }

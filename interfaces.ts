@@ -18,3 +18,11 @@ export interface Doctor {
   phone: string | null;
   category: Category[];
 }
+
+export interface SearchParams {
+  query?: string;
+  category?: string;
+  id?: string;
+  cname?: string;
+  [key: string]: any;
+}

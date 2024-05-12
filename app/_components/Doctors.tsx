@@ -1,5 +1,6 @@
 import { Doctor } from "@/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Doctors = ({ doctors }: { doctors: Doctor[] }) => {
@@ -27,9 +28,11 @@ const Doctors = ({ doctors }: { doctors: Doctor[] }) => {
               {`${item.years_of_experience} Years`}
             </h2>
             <h2 className="text-gray-500 text-sm">{item.address}</h2>
-            <h2 className="p-2 px-3 border-[1px] border-primary text-primary rounded-full text-center w-full text-[11px] mt-2 cursor-pointer hover:bg-primary hover:text-white">
-              Book Now
-            </h2>
+            <Link href={"/details/" + item.id} className="w-full">
+              <h2 className="p-2 px-3 border-[1px] border-primary text-primary rounded-full text-center w-full text-[11px] mt-2 cursor-pointer hover:bg-primary hover:text-white">
+                Book Now
+              </h2>
+            </Link>
           </div>
         </div>
       ))}

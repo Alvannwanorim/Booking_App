@@ -10,6 +10,8 @@ export const {
 } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
+      console.log(user);
+
       return true;
     },
     async session({ token, session }) {
