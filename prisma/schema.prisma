@@ -40,6 +40,7 @@ model Doctor {
   about String?
   phone String?
   category Category[]
+  appointments Appointment[]
 }
 
 enum UserRole {
@@ -93,4 +94,17 @@ model Session {
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
+}
+
+model Appointment {
+  id String @id @default(cuid())
+  userName String
+  email String
+  date  DateTime
+  time String
+  hospitals String
+  note String?
+  doctorId String
+  doctor Doctor @relation(fields: [doctorId], references: [id])
+  @@index([doctorId], name: "doctorIdIndex")
 }

@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Doctor } from "@/interfaces";
 import { GraduationCap, MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import BookAppointment from "./BookAppointment";
 const socialIcons = [
   {
     id: 1,
@@ -63,7 +63,7 @@ const DoctorDetails = ({ doctor }: { doctor: Doctor }) => {
               </div>
             ))}
           </div>
-          <Button className="mt-3 rounded-lg">Book Now</Button>
+          <BookAppointment doctor={doctor} />
         </div>
         {/* About Doctor */}
       </div>

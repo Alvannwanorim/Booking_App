@@ -26,3 +26,7 @@ export interface SearchParams {
   cname?: string;
   [key: string]: any;
 }
+
+export interface TimeSlot {
+  time: string;
+}
